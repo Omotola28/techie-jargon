@@ -1,0 +1,264 @@
+/* Navbar */
+.navBar {
+  background-color: var(--secondary-color);
+  color: var(--dark-color);
+}
+
+.navBar ul {
+  display: flex;
+}
+
+.navBar .flex {
+  justify-content: space-between;
+}
+
+.nav-container {
+  max-width: 1500px;
+  margin: 0 auto;
+  overflow: auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bmc-logo {
+  width: 100px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 2px;
+  border: 1px solid gray;
+  margin: 0 0 0 1rem;
+}
+
+.sidebar-footer:first-child div {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.form-header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: start;
+  padding: 10px;
+}
+
+.form-group {
+  padding-right: 5em;
+}
+
+#searchBox:focus,
+#category:focus {
+  outline: none;
+  border: 1px solid rgb(0 0 0 / 0%);
+}
+
+#category {
+  border-radius: 18px;
+  background: rgb(0 0 0 / 0%);
+  width: 300px;
+  border: aliceblue;
+}
+
+#searchBox {
+  border-radius: 18px;
+  background: #f4f4f4;
+  padding: 15px;
+  width: 500px;
+  height: 5px;
+  border: aliceblue;
+  box-shadow: 0px 1px 5px #00000030;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    position: absolute;
+    top: 50px;
+    right: -100%;
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+
+.nav-item {
+  height: 80px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-menu.active {
+  background: var(--secondary-color);
+  right: 0;
+  opacity: 1;
+  transition: all 0.6s ease;
+  z-index: 5;
+  height: 100vh; 
+  display: flex;
+  padding: 0; 
+  margin: 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-item:hover {
+  border-bottom: 1px solid var(--dark-color);
+}
+
+.nav-item, .nav-item-empty {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 5rem; 
+  color: var(--dark-color);
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--success-color);
+}
+
+.nav-item-empty{
+    border-bottom: none;
+}
+.link-text {
+    margin-left: 2em;
+    font-size: 20px;
+}
+
+.badge-item svg {
+    color: var(--error-color);
+}
+
+.badge-div {
+    display: flex;
+    flex-flow: wrap column;
+    position: relative;
+    right: 3rem;
+    margin: 1.5rem;
+}
+
+.badge-div p {
+  font-size: 12px;
+  color: var(--error-color);
+}
+
+.nav-item:last-child{
+    margin-top:auto;
+}
+
+.menu-icon {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+
+.modal {
+    font-size: 12px;
+    max-width: 700px;
+    background-color: white;
+    border: 1px solid var(--success-color);
+    padding: 20px;
+    width: 100%;
+    border-radius:2px;
+    box-shadow: 0px 0px 20px 0px #ffeea970;
+}
+.modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.modal > .close:focus {
+  outline: none;
+}
+
+.content input[type="text"], textarea {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+
+.content input[type="text"]:focus, textarea:focus {
+  outline: none;
+  border: 1px solid var(--success-color);
+} 
+
+.content input[type="text"] {
+  background-color: #eee;
+  height: 40px;
+  margin-bottom:1rem;
+  width: 100%;
+}
+
+.content textarea{
+  background-color: #eee;
+  width: 100%;
+  min-height: 100px;
+  resize: none;
+}
+
+.content input[type="submit"]{
+  display: block;
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  font-size: 0.9rem;
+  border: 0;
+  border-radius: 5px;
+  height: 40px;
+  padding: 0 20px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.content > .form-header {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.content > .form-header > .form-group{
+  padding-right: 0em;
+  display: block;
+  width: 100%;
+}
+
+.sidebar-footer {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: start;
+}
+
+.social-icons a {
+  margin-right: 1rem;
+}

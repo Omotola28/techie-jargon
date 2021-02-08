@@ -1,0 +1,101 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1.5fr 2.8fr 1.5fr;
+    grid-template-rows: 0.5fr 0.5fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "shape2 carousel bubbles"
+      ". shape3 shape3";
+}
+  
+#bubbles, #shape2 {
+    width: 0;
+}
+#bubbles {
+    grid-area: bubbles;
+}  
+
+#carousel {
+    grid-area: carousel;
+    text-align: center;
+}
+
+#shape2 {
+    grid-area: shape2;
+}
+
+#shape3 {
+    grid-area: shape3;
+    height: 0px
+}
+
+
+.body-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+}
+
+.card-carousel {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  margin: 100px auto;
+  align-items: center;
+  position: relative;
+  text-align: justify;
+}
+
+
+.btn {
+    margin-top: 8em;
+}
+
+/* .col {
+    margin-bottom: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: 1;
+    max-width: 50%;
+    flex-basis: 50%;
+    z-index: -100;
+} */
+
+.home__hero-img-wrapper {
+    max-width: 650px;
+    position: relative;
+    top: -14em;
+    z-index: -1;
+    left: 30em
+}
+
+.shape2-img{
+    width: 600px;
+    position: relative;
+    left: -15em;
+}
+  
+.shape3-img {
+    max-width: 95%;
+    margin-top: 0;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.bubbles-img {
+    width: 400px;
+    position: relative;
+    top: -3em;
+    z-index: -1;
+    right: -4em;
+}
+
+.error-message {
+  color: #8b0909;
+  font-size: 10px;
+  font-weight: 900;
+}
