@@ -102,14 +102,11 @@
 
 @media only screen and (max-width: 1440px) {
   .noOfHits {
-    --top: 40.5rem;
+    --top: 44.8rem;
   }
 }
 
 @media only screen and (max-width: 1280px) {
-  .noOfHits {
-    --top: 40.5rem;
-  }
 
   .bubbles > div {
     margin: -5em 0 0 25em;
