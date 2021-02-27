@@ -26,10 +26,10 @@ const Results = connectStateResults(
     searchResults && searchResults.nbHits !== 0 ? (
       children
     ) : (
-      <div className="notFoundCard">
+      <div className='notFoundCard'>
         <p>No results have been found for </p>
-        <br/>
-        <p className="no-result"> {searchState.query}.</p>
+        <br />
+        <p className='no-result'> {searchState.query}.</p>
       </div>
     )
 );
@@ -72,7 +72,6 @@ function HomePage() {
     }
   }, [indexes.currentIndex]);
 
-
   const Hit = ({ hit }) => <CustomHighlight attribute='term' hit={hit} />;
 
   const CustomHighlight = connectHighlight(({ highlight, attribute, hit }) => {
@@ -95,7 +94,7 @@ function HomePage() {
   return (
     <>
       <InstantSearch indexName='techterms' searchClient={searchClient}>
-        <Header/>
+        <Header />
         <section className='grid-container'>
           <Illustration
             mainClass='row shape2'
@@ -119,7 +118,7 @@ function HomePage() {
               </ul>
             </div>
           </div>
-          <div className="sideBar2">
+          <div className='sideBar2'>
             <Illustration
               mainClass='row bubbles'
               illustration={Illustration3}
