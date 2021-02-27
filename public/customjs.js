@@ -1,12 +1,10 @@
-
+//Mutate card items when sidebar is toggled
 window.addEventListener("load", (event) => {
 
   const screenWidthA = window.matchMedia("(max-width:1440px)");
   const screenWidthB = window.matchMedia("(max-width: 800px)");
   const sideBar = document.querySelector(".nav-menu");
-  let cards = document.querySelector(".card");
   let carousel = document.querySelector(".card-carousel"); 
-
   let starttime;
 
   function handleCardTransition(e) {
@@ -26,7 +24,7 @@ window.addEventListener("load", (event) => {
   function requestAnimationPath(lengthOfPath) {
     requestAnimationFrame(function (timestamp) {
       starttime = timestamp || new Date().getTime(); //if browser doesn't support requestAnimationFrame, generate our own timestamp using Date
-      moveit(timestamp, cards, lengthOfPath, 100); // 100px over 1 millisecond
+      transitionCard(timestamp, lengthOfPath, 100); // 100px over 1 millisecond
     });
   }
 
@@ -45,18 +43,21 @@ window.addEventListener("load", (event) => {
     }
   }
 
-  function moveit(timestamp, el, dist, duration) {
+  function transitionCard(timestamp, dist, duration) {
+    let el = document.querySelectorAll(".card");
+    el = Array.from(el); //convert to array
     //if browser doesn't support requestAnimationFrame, generate our own timestamp using Date:
-    var timestamp = timestamp || new Date().getTime();
-    var runtime = timestamp - starttime;
-    var progress = runtime / duration;
+    let time = timestamp || new Date().getTime();
+    let runtime = time - starttime;
+    let progress = runtime / duration;
     progress = Math.min(progress, 1);
-    el.style.left = (dist * progress).toFixed(2) + "px";
+    el.map(cardEl => cardEl.style.left = (dist * progress).toFixed(2) + "px");
+
     if (runtime < duration) {
       // if duration not met yet
-      requestAnimationFrame(function (timestamp) {
+      requestAnimationFrame(function (time) {
         // call requestAnimationFrame again with parameters
-        moveit(timestamp, el, dist, duration);
+        transitionCard(time, dist, duration);
       });
     }
   }
