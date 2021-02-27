@@ -43,7 +43,6 @@ function HomePage() {
   });
 
   const Stats = ({ processingTimeMS, nbHits }) => (
-    
     <div className='noOfHits'>
       {setIndicesLength(nbHits)}
       Found {nbHits} results in {processingTimeMS}ms
@@ -51,7 +50,6 @@ function HomePage() {
   );
 
   const CustomStats = connectStats(Stats);
- 
 
   const handleCardForwardTransition = useCallback(() => {
     // If we've reached the end, start again from the first card,
@@ -110,7 +108,7 @@ function HomePage() {
                 <Results>
                   <Hits hitComponent={Hit} />
                 </Results>
-                <CustomStats/>
+                <CustomStats />
                 <BsFillCaretRightFill
                   size={50}
                   color='#2f2f2f'
