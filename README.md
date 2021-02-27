@@ -8,4 +8,4 @@ Install dependencies by running
 `npm install`
 in the project root directory 
 
-> For development mode you can run just `yarn start`
+> For development mode you can run just `npm run start`
