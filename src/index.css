@@ -64,35 +64,9 @@ img {
   width: 100%;
 }
 
+.container {
+  display: grid;
+}
+
 /** Media Queries **/ 
 
-@media only screen and (min-width: 1001px){
-  .badge-div {
-    right: 0 !important;
-  }
-
-  .nav-item svg {
-    width: 20px; 
-  }
-
-  .link-text {
-    font-size: 15px !important; 
-  }
-
-  .nav-item:last-child {
-    margin-bottom: 20px;
-    margin-top: auto;
-  }
-}
-@media only screen and (max-width:1000px) {
-  .container {
-    display: none;
-  }
-
-  body {
-    background-image: url("./resources/coming-soon.svg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-  }
-}

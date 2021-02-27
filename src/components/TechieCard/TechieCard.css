@@ -1,39 +1,93 @@
 .card {
-    background: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #eeeeee;
-    padding: 30px;
-    box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1);
-    width: 540px;
-    height: 350px;
-    transition: all 0.4s ease;
-    opacity: 0;
-    position: absolute;
-    transform: scale(0.85) translateY(50px);
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #eeeeee;
+  padding: 30px;
+  box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.75s ease;
+  width: 700px;
+  height: 450px;
+  opacity: 0;
+  transform: scale(0.85) translateY(50px);
+  text-align: justify;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.card h2 {
+  font-weight: bolder;
+  text-shadow: 2px 2px var(--success-color);
+}
+
+.card h2,
+.card p {
+  line-height: 1.5;
+  margin: 0;
+}
+
+.card.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: all 1s ease;
+  box-shadow: 0 30px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.card.next {
+  opacity: 1;
+  z-index: 0;
+}
+
+.card.prev {
+  transform: scale(1.1) translateY(-50px);
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.card-carousel > div:not([class]) {
+  background-color: #ffffff;
+  box-shadow: 0 10px 5px rgb(0 0 0 / 10%);
+  border: 1px solid #eeeeee;
+  width: 580px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card,
+.right-arrow,
+.noOfHits,
+.card-carousel > div:not([class]) {
+  top: var(--top, 0);
+  bottom: var(--bottom, 0);
+  margin: auto;
+  position: absolute;
+  left: var(--left, 0);
+  right: 0;
+}
+
+.right-arrow {
+  --bottom: -35rem;
+}
+
+.noOfHits {
+  text-align: center;
+  --top: 39.5rem;
+  font-size: 12px;
+  font-style: italic;
+  color: gray;
+  --left: 26rem;
+}
+
+mark {
+  background-color: var(--secondary-color);
+}
+
+/** Media Queries **/
+@media only screen and (max-width:768px) {
+  .noOfHits {
+    --top: 63em;
   }
-  
-  .card h2,
-  .card p {
-    line-height: 1.5;
-    margin: 0;
-  }
-  
-  .card.active {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    box-shadow: 0 30px 20px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-  }
-  
-  .card.next {
-    opacity: 1;
-    z-index: 0;
-  }
-  
-  .card.prev {
-    transform: scale(1.1) translateY(-50px);
-    z-index: 2;
-    opacity: 0;
-    visibility: hidden;
-  }
-  
+}

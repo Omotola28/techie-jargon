@@ -2,6 +2,8 @@
 .navBar {
   background-color: var(--secondary-color);
   color: var(--dark-color);
+  position: sticky;
+  top: 0;
 }
 
 .navBar ul {
@@ -13,21 +15,12 @@
 }
 
 .nav-container {
-  max-width: 1500px;
+  max-width: 100%;
   margin: 0 auto;
   overflow: auto;
-  padding: 0 20px;
+  padding: 0 20px 5px;
   display: flex;
   justify-content: space-between;
-}
-
-.bmc-logo {
-  width: 100px;
-  background-color: white;
-  padding: 10px;
-  border-radius: 2px;
-  border: 1px solid gray;
-  margin: 0 0 0 1rem;
 }
 
 .sidebar-footer:first-child div {
@@ -35,32 +28,22 @@
   flex-flow: row wrap;
 }
 
-.form-header {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: start;
-  padding: 10px;
-}
-
-.form-group {
-  padding-right: 5em;
-}
-
-#searchBox:focus,
-#category:focus {
+.ais-SearchBox-input:focus,
+.ais-SearchBox-submit:focus,
+.ais-SearchBox-reset:focus {
   outline: none;
   border: 1px solid rgb(0 0 0 / 0%);
 }
 
-#category {
-  border-radius: 18px;
-  background: rgb(0 0 0 / 0%);
-  width: 300px;
-  border: aliceblue;
+.ais-SearchBox-form {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid var(--success-color);
+  padding: 2px;
+  margin-top: 5px;
 }
 
-#searchBox {
-  border-radius: 18px;
+.ais-SearchBox-input {
   background: #f4f4f4;
   padding: 15px;
   width: 500px;
@@ -69,15 +52,29 @@
   box-shadow: 0px 1px 5px #00000030;
 }
 
+.ais-SearchBox-submit,
+.ais-SearchBox-reset {
+  border: none;
+  background-color: #f4f4f4;
+  box-shadow: 0px 1px 5px #00000030;
+  width: 30px;
+}
+
+.ais-SearchBox-submitIcon,
+.ais-SearchBox-resetIcon {
+  width: 15px;
+  height: 15px;
+}
+
 .nav-menu {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    position: absolute;
-    top: 50px;
-    right: -100%;
-    opacity: 1;
-    transition: all 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  position: absolute;
+  top: 50px;
+  right: -100%;
+  opacity: 1;
+  transition: all 0.5s ease;
 }
 
 .nav-item {
@@ -91,9 +88,9 @@
   opacity: 1;
   transition: all 0.6s ease;
   z-index: 5;
-  height: 100vh; 
+  height: 100vh;
   display: flex;
-  padding: 0; 
+  padding: 0;
   margin: 0;
   flex-direction: column;
   align-items: center;
@@ -103,34 +100,35 @@
   border-bottom: 1px solid var(--dark-color);
 }
 
-.nav-item, .nav-item-empty {
+.nav-item,
+.nav-item-empty {
   width: 100%;
   display: flex;
   align-items: center;
-  height: 5rem; 
+  height: 5rem;
   color: var(--dark-color);
   padding: 1.5rem;
   border-bottom: 1px solid var(--success-color);
 }
 
-.nav-item-empty{
-    border-bottom: none;
+.nav-item-empty {
+  border-bottom: none;
 }
 .link-text {
-    margin-left: 2em;
-    font-size: 20px;
+  margin-left: 2em;
+  font-size: 20px;
 }
 
 .badge-item svg {
-    color: var(--error-color);
+  color: var(--error-color);
 }
 
 .badge-div {
-    display: flex;
-    flex-flow: wrap column;
-    position: relative;
-    right: 3rem;
-    margin: 1.5rem;
+  display: flex;
+  flex-flow: wrap column;
+  position: relative;
+  right: 3rem;
+  margin: 1.5rem;
 }
 
 .badge-div p {
@@ -138,8 +136,9 @@
   color: var(--error-color);
 }
 
-.nav-item:last-child{
-    margin-top:auto;
+.nav-item:last-child {
+  margin-top: auto;
+  margin-bottom: 3em;
 }
 
 .menu-icon {
@@ -152,16 +151,25 @@
   padding-right: 10px;
 }
 
+.bmc-logo {
+  max-width: 100px;
+  background-color: white;
+  padding: 5px;
+  border: 1px solid #cde4b4;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px #8080803d;
+  margin-bottom: 10px;
+}
 
 .modal {
-    font-size: 12px;
-    max-width: 700px;
-    background-color: white;
-    border: 1px solid var(--success-color);
-    padding: 20px;
-    width: 100%;
-    border-radius:2px;
-    box-shadow: 0px 0px 20px 0px #ffeea970;
+  font-size: 12px;
+  max-width: 700px;
+  background-color: white;
+  border: 1px solid var(--success-color);
+  padding: 20px;
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: 0px 0px 20px 0px #ffeea970;
 }
 .modal > .header {
   width: 100%;
@@ -198,32 +206,41 @@
   outline: none;
 }
 
-.content input[type="text"], textarea {
+.error-message {
+  color: #8b0909;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.content input[type="text"],
+textarea {
   border-radius: 5px;
   border: 1px solid #ddd;
   padding: 20px;
 }
 
-.content input[type="text"]:focus, textarea:focus {
+.content input[type="text"]:focus,
+textarea:focus {
   outline: none;
   border: 1px solid var(--success-color);
-} 
+}
 
 .content input[type="text"] {
   background-color: #eee;
   height: 40px;
-  margin-bottom:1rem;
+  margin-bottom: 1rem;
   width: 100%;
 }
 
-.content textarea{
+.content textarea {
   background-color: #eee;
   width: 100%;
   min-height: 100px;
   resize: none;
 }
 
-.content input[type="submit"]{
+.content input[type="submit"],
+.request-waiting {
   display: block;
   background-color: var(--dark-color);
   color: var(--light-color);
@@ -236,6 +253,11 @@
   width: 100%;
 }
 
+.request-waiting {
+  text-align: center;
+  line-height: 3;
+}
+
 .content > .form-header {
   display: flex;
   flex-flow: column wrap;
@@ -243,7 +265,7 @@
   align-items: center;
 }
 
-.content > .form-header > .form-group{
+.content > .form-header > .form-group {
   padding-right: 0em;
   display: block;
   width: 100%;
@@ -261,4 +283,59 @@
 
 .social-icons a {
   margin-right: 1rem;
+}
+
+.social-icons:last-child span {
+  font-size: 12px;
+  color: #79797a;
+  font-style: italic;
+  margin-left: 5em;
+  text-decoration: underline;
+}
+
+/** Media Queries **/
+@media only screen and (max-width: 1380px) {
+  .nav-menu {
+    width: 35%;
+  }
+}
+
+@media only screen and (max-width: 1160px) {
+  .link-text {
+    font-size: 15px;
+  }
+
+  .badge-div {
+    right: 0;
+  }
+
+  .social-icons:last-child span {
+    margin-left: auto;
+  }
+
+  .nav-menu {
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width: 870px) {
+  .nav-menu {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 675px) {
+  .nav-menu {
+    width: 60%;
+  }
+
+  .ais-SearchBox-input {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  .nav-menu {
+    width: 70%;
+  }
 }

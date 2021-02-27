@@ -2,8 +2,21 @@ import React, { useState, useEffect } from "react";
 import { FaTimes, FaBars } from "react-icons/fa";
 import { GiAbstract021, GiBallHeart } from "react-icons/gi";
 import axios from "axios";
-import {TiSocialInstagram, TiSocialTwitter, TiSocialGithub, TiSocialDribbbleCircular } from "react-icons/ti"; 
-import {api} from "../helper/apiUrls";
+import {
+  TiSocialInstagram,
+  TiSocialTwitter,
+  TiSocialGithub,
+  TiSocialDribbbleCircular,
+} from "react-icons/ti";
+import {
+  CREATE_JARGON_API_LINK,
+  BMC_LINK,
+  TWITTER_LINK,
+  INSTAGRAM_LINK,
+  BLOG_LINK,
+  GITHUB_LINK,
+} from "../constants/externalLinks";
+import { RequestState, LIMIT } from "../constants/requestState";
 import BuyMeCoffee from "../resources/bmc.svg";
 import { useWindowSize } from "react-use";
 import Confetti from "react-confetti";
@@ -11,16 +24,15 @@ import { useForm } from "react-hook-form";
 import Popup from "reactjs-popup";
 import Badges from "./Badges";
 import "./Header/Header.css";
+import { SearchBox } from "react-instantsearch-dom";
 
-function Header(props) {
-  const { categoryForm } = props;
-
-  const initialCount = () => Number(window.localStorage.getItem('count')); 
+function Header() {
+  const initialCount = () => Number(window.localStorage.getItem("count"));
   const [click, setClick] = useState(false);
   const [noOfSubmits, setNoOfSubmits] = useState(initialCount);
   const [open, setOpen] = useState(false);
   const { width, height } = useWindowSize();
-  const [formSubmitSuccess, setFormSubmitSuccess] = useState();
+  const [status, setStatus] = useState(RequestState.NOACTION);
   const closeModal = () => setOpen(false);
 
   const handleClick = () => setClick(!click);
@@ -28,142 +40,179 @@ function Header(props) {
 
   const { register, handleSubmit, errors } = useForm();
 
-  const {create} = api;
-
   useEffect(() => {
-    window.localStorage.setItem('count', noOfSubmits)
+    window.localStorage.setItem("count", noOfSubmits);
   }, [noOfSubmits]);
 
-  const onSubmit = (data) => {
-    console.log(data);
-    axios.post(create, data)
-    .then(function (response) {
-      if(response.status !== 200){
-        setFormSubmitSuccess(false);
-      }
+  const onHandleJargonSubmit = (data) => {
+    setStatus(RequestState.LOADING);
+    axios
+      .post(CREATE_JARGON_API_LINK, data)
+      .then(function (response) {
+        if (response.status !== 200) {
+          setStatus(RequestState.ERROR);
+        }
 
-        setFormSubmitSuccess(true);
+        setStatus(RequestState.SUCCESS);
         setNoOfSubmits(noOfSubmits + 1);
         setTimeout(() => {
           closeModal();
-          setFormSubmitSuccess(null);
-        }, 3000);
-    })
-    .catch(function (error) {
-      setFormSubmitSuccess(false);
-    });
+          setStatus(RequestState.NOACTION);
+        }, 2000);
+      })
+      .catch(function (error) {
+        setStatus(RequestState.ERROR);
+      });
   };
 
   return (
     <header className='navBar'>
       <div className='nav-container'>
-        {categoryForm}
+        <SearchBox
+          className='search-bar'
+          translations={{ placeholder: "Search Techie Jargon" }}
+        />
         <div className='menu-icon' onClick={handleClick}>
           {click ? <FaTimes size={24} /> : <FaBars size={24} />}
         </div>
         <ul className={click ? "nav-menu active" : "nav-menu"}>
-          <li className='nav-item-empty'></li>
-          <li className='nav-item-empty'></li>
+          {returnEmptyListItem()}
+          {returnEmptyListItem()}
           <li className='nav-item'>
             <GiAbstract021 size={32} />
             <span className='link-text'>Badges</span>
           </li>
           <Badges size={20} noOfSubmits={noOfSubmits} />
-          <li className='nav-item'>
+          <li className='nav-item transitionCard'>
             <GiBallHeart size={32} />
-            <span
-              onClick={() => {
-                setOpen((o) => !o);
-                closeMenu();
-              }}
-              className='link-text'
-            >
-              Add Techie Jargon
-            </span>
-            <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-              <div className='modal'>
-                {formSubmitSuccess === true ? (
-                  <Confetti width={width / 2.5} height={height / 2} />
-                ) : null}
-                <button className='close' onClick={closeModal}>
-                  &times;
-                </button>
-                {formSubmitSuccess === false ? (
-                  <p className='error-message'>
-                    Something went wrong, try again later
-                  </p>
-                ) : (
-                  ""
-                )}
-                <div className='header'> Add Techie Jargon</div>
-                <div className='content'>
-                  <form
-                    className='form-header'
-                    onSubmit={handleSubmit(onSubmit)}
-                  >
-                    <div className='form-group'>
-                      <label htmlFor='term'>Write Term</label>
-                      <input
-                        name='term'
-                        type='text'
-                        ref={register({
-                          required: "*Term field cannot be empty",
-                          maxLength: 20,
-                        })}
-                      />
-                      {errors.term && (
-                        <span className='error-message'>
-                          {errors.term.message}
-                        </span>
-                      )}
-                    </div>
-                    <div className='form-group'>
-                      <label htmlFor='definition'>Write Definition</label>
-                      <textarea
-                        name='definition'
-                        rows={10}
-                        cols={50}
-                        ref={register({
-                          required: "*Definition field cannot be empty",
-                        })}
-                      />
-                      {errors.definition && (
-                        <span className='error-message'>
-                          {errors.definition.message}
-                        </span>
-                      )}
-                    </div>
-                    <div className='form-group'>
-                      <input type='submit' />
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </Popup>
+            {noOfSubmits > LIMIT ? (
+              <span className='link-text'>Submit Limit Reached :)</span>
+            ) : (
+              <span
+                onClick={() => {
+                  setOpen((o) => !o);
+                  closeMenu();
+                }}
+                className='link-text'
+              >
+                Add Techie Jargon
+              </span>
+            )}
           </li>
-          <li className='nav-item creator-info'>
-            <div className='sidebar-footer'>
-              <div>
-                  <p>Built by @mycodinghabits</p>
-                  <div className="bmc-logo">
-                      <a href="https://www.buymeacoffee.com/mycodinghabits"><img src={BuyMeCoffee} alt={"Buy me coffee"}/></a>
-                  </div>
-              </div>
-              
-              <div className='social-icons'>
-                <a href='http://instagram.com/mycodinghabits'><TiSocialInstagram size={20}/></a>
-                <a href='http://blog.oshogunle.com'><TiSocialDribbbleCircular size={20}/></a>
-                <a href='https://twitter.com/mycodinghabits'><TiSocialTwitter size={20}/></a>
-                <a href='https://github.com/Omotola28'><TiSocialGithub size={20}/></a>
-              </div>
-              
-            </div>
-          
-          </li>
+          {returnPopForm()}
+          {returnSideMenuFooter()}
         </ul>
       </div>
     </header>
   );
+
+  function returnSideMenuFooter() {
+    return (
+      <li className='nav-item creator-info'>
+        <div className='sidebar-footer'>
+          <div>
+            <div className='bmc-logo'>
+              <a href={BMC_LINK}>
+                <img src={BuyMeCoffee} alt={"Buy me coffee"} />
+              </a>
+            </div>
+          </div>
+          {returnSocialIcons()}
+        </div>
+      </li>
+    );
+  }
+
+  function returnEmptyListItem() {
+    return <li className='nav-item-empty'></li>;
+  }
+
+  function returnSocialIcons() {
+    return (
+      <div className='social-icons'>
+        <a href={INSTAGRAM_LINK}>
+          <TiSocialInstagram size={20} />
+        </a>
+        <a href={BLOG_LINK}>
+          <TiSocialDribbbleCircular size={20} />
+        </a>
+        <a href={TWITTER_LINK}>
+          <TiSocialTwitter size={20} />
+        </a>
+        <a href={GITHUB_LINK}>
+          <TiSocialGithub size={20} />
+        </a>
+        <span>Built by @mycodinghabits</span>
+      </div>
+    );
+  }
+
+  function returnPopForm() {
+    return (
+      <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+        <div className='modal'>
+          {status === RequestState.SUCCESS && (
+            <Confetti width={width / 2.5} height={height / 2} />
+          )}
+          <button className='close' onClick={closeModal}>
+            &times;
+          </button>
+          {status === RequestState.ERROR && (
+            <p className='error-message'>
+              Something went wrong, try again later
+            </p>
+          )}
+          <div className='header'> Add Techie Jargon</div>
+          <div className='content'>
+            <form
+              className='form-header'
+              onSubmit={handleSubmit(onHandleJargonSubmit)}
+            >
+              <div className='form-group'>
+                <label htmlFor='term'>Write Term</label>
+                <input
+                  name='term'
+                  type='text'
+                  ref={register({
+                    required: "*Term field cannot be empty",
+                    maxLength: 20,
+                  })}
+                />
+                {errors.term && (
+                  <span className='error-message'>{errors.term.message}</span>
+                )}
+              </div>
+              <div className='form-group'>
+                <label htmlFor='definition'>Write Definition</label>
+                <textarea
+                  name='definition'
+                  rows={10}
+                  cols={50}
+                  ref={register({
+                    required: "*Definition field cannot be empty",
+                  })}
+                />
+                {errors.definition && (
+                  <span className='error-message'>
+                    {errors.definition.message}
+                  </span>
+                )}
+              </div>
+              <div className='form-group'>
+                {status === RequestState.LOADING ? (
+                  <span className='request-waiting'>
+                    Processing request....
+                  </span>
+                ) : (
+                  <input type='submit' />
+                )}
+              </div>
+            </form>
+          </div>
+        </div>
+      </Popup>
+    );
+  }
 }
 
 export default Header;
