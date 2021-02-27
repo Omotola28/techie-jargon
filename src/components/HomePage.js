@@ -3,7 +3,7 @@ import algoliasearch from "algoliasearch/lite";
 import {
   InstantSearch,
   Hits,
-  connectHits,
+  connectStats,
   connectHighlight,
   connectStateResults,
 } from "react-instantsearch-dom";
@@ -26,9 +26,8 @@ const Results = connectStateResults(
     searchResults && searchResults.nbHits !== 0 ? (
       children
     ) : (
-      <div className='notFoundCard'>
+      <div className='not-found-card'>
         <p>No results have been found for </p>
-        <br />
         <p className='no-result'> {searchState.query}.</p>
       </div>
     )
@@ -43,13 +42,16 @@ function HomePage() {
     nextIndex: 1,
   });
 
-  const NoOfHits = ({ hits }) => (
+  const Stats = ({ processingTimeMS, nbHits }) => (
+    
     <div className='noOfHits'>
-      {setIndicesLength(hits.length)}
-      {`Results:- ${hits.length}`}
+      {setIndicesLength(nbHits)}
+      Found {nbHits} results in {processingTimeMS}ms
     </div>
   );
-  const CustomHits = connectHits(NoOfHits);
+
+  const CustomStats = connectStats(Stats);
+ 
 
   const handleCardForwardTransition = useCallback(() => {
     // If we've reached the end, start again from the first card,
@@ -108,7 +110,7 @@ function HomePage() {
                 <Results>
                   <Hits hitComponent={Hit} />
                 </Results>
-                <CustomHits />
+                <CustomStats/>
                 <BsFillCaretRightFill
                   size={50}
                   color='#2f2f2f'

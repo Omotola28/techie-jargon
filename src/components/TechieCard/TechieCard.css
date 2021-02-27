@@ -46,7 +46,7 @@
   visibility: hidden;
 }
 
-.notFoundCard {
+.not-found-card {
   background-color: #ffffff;
   box-shadow: 0 10px 5px rgb(0 0 0 / 10%);
   border: 1px solid #eeeeee;
@@ -60,7 +60,7 @@
 .card,
 .right-arrow,
 .noOfHits,
-.notFoundCard {
+.not-found-card {
   top: var(--top, 0);
   bottom: var(--bottom, 0);
   margin: auto;
