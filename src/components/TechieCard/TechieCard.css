@@ -95,6 +95,6 @@ mark {
 /** Media Queries **/
 @media only screen and (max-width:768px) {
   .noOfHits {
-    --top: 63em;
+    display: none;
   }
 }
