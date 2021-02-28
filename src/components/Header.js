@@ -162,7 +162,15 @@ function Header() {
               Something went wrong, try again later
             </p>
           )}
-          <div className='header'> Add Techie Jargon</div>
+          {status === RequestState.LOADING ? (
+            <div className='header'>
+              <h3>Your term will show after it has been verified!</h3>
+            </div>
+          ) : (
+            <div className='header'>
+              <h3>Add Techie Jargon</h3>
+            </div>
+          )}
           <div className='content'>
             <form
               className='form-header'
