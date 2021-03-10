@@ -4,6 +4,7 @@ window.addEventListener("load", (event) => {
   const screenWidthA = window.matchMedia("(max-width:1440px)");
   const screenWidthB = window.matchMedia("(max-width: 800px)");
   const sideBar = document.querySelector(".nav-menu");
+  const noOfHits = document.querySelector(".noOfHits");
   let carousel = document.querySelector(".card-carousel"); 
   let starttime;
 
@@ -65,8 +66,10 @@ window.addEventListener("load", (event) => {
   document.querySelector(".menu-icon").addEventListener("click", (event) => {
     const sideBar = document.querySelector(".nav-menu");
     if (!sideBar.classList.contains("active")) {
+        noOfHits.style.display = "none";
         requestAnimationPath(-250);
     } else {
+        noOfHits.style.display = "block";
         requestAnimationPath(0);
     }
   });

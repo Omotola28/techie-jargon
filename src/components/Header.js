@@ -100,6 +100,7 @@ function Header() {
             )}
           </li>
           {returnPopForm()}
+          {returnEmptyListItem()}
           {returnSideMenuFooter()}
         </ul>
       </div>
@@ -110,13 +111,11 @@ function Header() {
     return (
       <li className='nav-item creator-info'>
         <div className='sidebar-footer'>
-          <div>
-            <div className='bmc-logo'>
-              <a href={BMC_LINK}>
+            <a href={BMC_LINK} target='_blank' rel='noreferrer'>
+              <div className='bmc-logo'>
                 <img src={BuyMeCoffee} alt={"Buy me coffee"} />
-              </a>
-            </div>
-          </div>
+              </div>
+            </a>
           {returnSocialIcons()}
         </div>
       </li>
@@ -131,7 +130,9 @@ function Header() {
     return (
       <div className='social-icons'>
         <a href={INSTAGRAM_LINK}>
-          <TiSocialInstagram size={20} />
+          <div>
+            <TiSocialInstagram size={20} />
+          </div>
         </a>
         <a href={BLOG_LINK}>
           <TiSocialDribbbleCircular size={20} />

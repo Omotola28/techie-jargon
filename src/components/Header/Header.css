@@ -137,8 +137,8 @@
 }
 
 .nav-item:last-child {
-  margin-top: auto;
-  margin-bottom: 3em;
+  margin: auto;
+  border-bottom: 0px; 
 }
 
 .menu-icon {
