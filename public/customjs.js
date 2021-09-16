@@ -1,7 +1,7 @@
 //Mutate card items when sidebar is toggled
 window.addEventListener("load", (event) => {
 
-  const screenWidthA = window.matchMedia("(max-width:1440px)");
+  const screenWidthA = window.matchMedia("(max-width:1940px)");
   const screenWidthB = window.matchMedia("(max-width: 800px)");
   const sideBar = document.querySelector(".nav-menu");
   const noOfHits = document.querySelector(".noOfHits");
