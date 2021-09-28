@@ -9,3 +9,7 @@ Install dependencies by running
 in the project root directory 
 
 > For development mode you can run just `npm run start`
+
+### Checkout Blog Post
+
+[Techie Jargon](https://github.com/Omotola28/techie-jargon)
