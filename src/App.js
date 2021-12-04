@@ -3,12 +3,12 @@ import HomePage from './components/HomePage';
 function App() {
   return (
     <>
-      //Practicing merge conflicts 
+        //making conflicting changes here
       <div className="container">
-        <HomePage/>
+        <HomePage/>kjkjks
       </div>
     </>
-   
+
   );
 }
 
